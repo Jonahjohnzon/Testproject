@@ -10,13 +10,13 @@ const registrationSchema = yup.object().shape({
     comfirmPassword: yup.string()
       .oneOf([yup.ref('password'), null], 'Passwords must match')
       .required('Confirm password is required'),
-  });
+  })
 
 //login Validation
 const loginSchema = yup.object().shape({
   email: yup.string().email('Invalid email format').required('Email is required'),
   password: yup.string().required('Password is required'),
-});
+})
 
 module.exports.registrationSchema  = registrationSchema 
 module.exports.loginSchema = loginSchema
