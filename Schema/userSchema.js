@@ -1,5 +1,16 @@
 const {Schema,model} =  require('mongoose')
 
+//User notification schema
+const Notification = Schema({
+    message:{
+        type:String
+    },
+    opened:{
+        type:Boolean,
+        default:false
+    }
+},{timestamps:true})
+
 //User Schema
 const User = new Schema({
     name:{
@@ -27,16 +38,7 @@ const User = new Schema({
         type:Boolean,
         default:false
     },
-    notification:{
-        number:{
-        type:Number,
-        default:1
-        },
-        alert:{
-        type:Boolean,
-        default:true
-        }
-    }
+    notification:[Notification]
 },{timestamps:true})
 
 module.exports.User = model('Users',User)
