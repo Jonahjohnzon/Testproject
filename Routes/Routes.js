@@ -4,10 +4,13 @@ const {
     signUp,
     logIn
 
-} = require('../Controller/AccountController')
+} = require('../Controller/AccountManagement/AccountController')
 
 //AccountController Routes
 router.post('/api/signup', signUp)
 router.post('/api/login', logIn)
+
+
+//google auth
 
 module.exports = router

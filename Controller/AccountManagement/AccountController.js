@@ -1,8 +1,8 @@
-const {User} = require("../Schema/userSchema")
+const {User} = require("../../Schema/userSchema")
 const bcrypt = require("bcrypt")
 const JWT = require("jsonwebtoken")
-const verifyEmail = require("../Email/signupEmail")
-const {registrationSchema,loginSchema} = require("./ValidationSchema/Schema")
+const verifyEmail = require("../../Email/signupEmail")
+const {registrationSchema,loginSchema} = require("../ValidationSchema/Schema")
 
 
 

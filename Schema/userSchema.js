@@ -8,6 +8,18 @@ const Notification = Schema({
     opened:{
         type:Boolean,
         default:false
+    },
+    sentfrom:{
+        type: Schema.Types.ObjectId,
+        ref: 'Users'
+    },
+    title:{
+        type:String
+    },
+    origin:{
+        type:String,
+        enum:['keja', 'user'],
+        required:true
     }
 },{timestamps:true})
 
@@ -23,11 +35,12 @@ const User = new Schema({
     },
     password:{
         type:String,
-        required:true
+    },
+    profile_image:{
+        type:String,
     },
     role:{
         type:String,
-        required:true,
         enum: ['tenant', 'landlord', 'manager'], // Only allow these values
         message: '{VALUE} is not a valid role' // Custom error message
     },
