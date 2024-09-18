@@ -18,3 +18,4 @@ app.listen(port, ()=>{
     console.log('Connected to port: ' + port)
 })
 
+export default app;
