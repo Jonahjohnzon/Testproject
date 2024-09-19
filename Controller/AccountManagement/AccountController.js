@@ -101,7 +101,65 @@ catch(error){
     return response.status(400).json({result:false, message:`${error}`})
 }
 }
+
+//activate email
+const emailActivation = async(request, response)=>{
+    try{
+    const token = request.body.token
+
+    //Comfirm token
+    const verifyEmail = JWT.verify(token, process.env.EMAIL_TOKEN)
+
+    const userCheck = await User.findOne({ email: verifyEmail.Cap_email });
+    // Check if email is already verified
+    if(userCheck.verified)
+    {
+        return response.status(200).json({result:false, message:`Email already verified`})
+    }
+
+    //Verify user
+    const updateResult = await User.findOneAndUpdate({email:verifyEmail.Cap_email},{
+        $set:{
+            verified:true
+        }
+    })
+
+    if(updateResult)
+    {
+    return response.status(200).json({result:true, message:`Email verified`})
+    } else {
+        return response.status(404).json({ result: false, message: "User not found" });
+    }
+
+    }
+    catch(error)
+    {
+        return response.status(400).json({result:false, message:`Authentication Error`})
+    }
+}
+
+const userData = async (request, response) =>{
+try{
+    const id = request.userId
+
+    //get user details
+    const data = await User.findOne({_id: id},{password:0})
+    if(!data){
+        return response.status(400).json({result:false, message:'User not found'})
+    }
+
+    return response.status(200).json({result:true, message:"user Details", userDetails:data})
+}
+catch(error)
+{
+    return response.status(500).json({result:false, message:`Error when getting user details`})
+
+}
+
+}
 module.exports = {
     signUp,
-    logIn 
+    logIn,
+    emailActivation,
+    userData 
 }

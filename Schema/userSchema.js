@@ -41,8 +41,9 @@ const User = new Schema({
     },
     role:{
         type:String,
-        enum: ['tenant', 'landlord', 'manager'], // Only allow these values
-        message: '{VALUE} is not a valid role' // Custom error message
+        enum: ['tenant', 'landlord', 'manager', 'none'], // Only allow these values
+        message: '{VALUE} is not a valid role', // Custom error message
+        default:'none'
     },
     phone:{
         type:String,

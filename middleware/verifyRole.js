@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 const {User} = require('../Schema/userSchema') 
 
-const tokenVerification = async (request, response, next)=>{
+const  verifyRole = async (request, response, next)=>{
 try{
     const token = request.headers["auth-token"]
 
@@ -14,16 +14,6 @@ try{
     
     //verify token
     const tokenobject = jwt.verify(token, process.env.JWT)
-    const id = tokenobject.id
-
-    //find user
-    const getUser = await User.findOne({_id:id})
-
-    if(getUser?.role == "none")
-    {
-        return response.status(400).json({result:false, message:  'Route not allowed', redirect:true})
-    }
-
     request.userId = tokenobject.id
     return next()
     }
@@ -33,4 +23,4 @@ catch(error)
     }
 }
 
-module.exports = tokenVerification;
+module.exports = verifyRole;

@@ -17,7 +17,7 @@ const  verifyEmail = async({userEmail, token})=> {
         <p>Hello,</p>
         <b>Please verify your Keja account by clicking the button below</b>
         <br/><br/>
-        <a href="#" 
+        <a href="http://localhost:3000/activation/${token}" 
            style="display: inline-block; padding: 10px 20px; background-color: #007BFF; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
            Activate email
         </a>
