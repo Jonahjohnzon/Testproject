@@ -10,7 +10,7 @@ const {registrationSchema,loginSchema} = require("../ValidationSchema/Schema")
 const signUp = async(request, response)=>{
 try{
     await registrationSchema.validate(request.body); 
-    const {password,name,email,role} = request.body
+    const {password,name,email} = request.body
     const Cap_email = email.toUpperCase()
     //encrypt password
     const salt = await bcrypt.genSalt();
