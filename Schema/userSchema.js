@@ -2,7 +2,7 @@ const {Schema,model} =  require('mongoose')
 
 //User notification schema
 const Notification = Schema({
-    message:{
+    text:{
         type:String
     },
     opened:{
@@ -20,6 +20,12 @@ const Notification = Schema({
         type:String,
         enum:['keja', 'user'],
         required:true
+    },
+    bgColor:{
+        type:String
+    },
+    icon:{
+        type:String
     }
 },{timestamps:true})
 

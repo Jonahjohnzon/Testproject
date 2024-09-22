@@ -8,7 +8,7 @@ try{
     //check if token
     if(!token)
         {
-            return response.status(400).json({result:false, message: 'Please login', login:false})
+            return response.status(403).json({result:false, message: 'Please login', login:false})
         }
 
     //verify token
@@ -28,16 +28,16 @@ try{
     //check if no role
     else if(getUser?.role == "none"){
 
-        return response.status(400).json({result:false, message:  'Route not allowed', redirect:true})
+        return response.status(403).json({result:false, message:  'Route not allowed', redirect:true})
     }
 
     else{
-        return response.status(400).json({result:false, message:  'Route not allowed'})
+        return response.status(403).json({result:false, message:  'Route not allowed'})
     }
     }
 catch(error)
     {
-        return response.status(400).json({result:false, message:  'Route not allowed'})
+        return response.status(403).json({result:false, message:  'Route not allowed'})
     }
 }
 

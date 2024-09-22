@@ -10,7 +10,7 @@ const {registrationSchema,loginSchema} = require("../ValidationSchema/Schema")
 const signUp = async(request, response)=>{
 try{
     await registrationSchema.validate(request.body); 
-    const {password,name,email} = request.body
+    const {password,name,email,role} = request.body
     const Cap_email = email.toUpperCase()
     //encrypt password
     const salt = await bcrypt.genSalt();
@@ -36,10 +36,30 @@ try{
     //email token creation
     const emailtoken = JWT.sign({Cap_email}, process.env.EMAIL_TOKEN, {expiresIn: '1h'})
 
+
+    //email comtent
+    let emailContent = `
+    <div style="font-family: Arial, sans-serif; color: #333;">
+    <p>Hello,</p>
+    <b>Please verify your Keja account by clicking the button below</b>
+    <br/><br/>
+    <a href="http://localhost:3000/activation/${emailtoken}" 
+       style="display: inline-block; padding: 10px 20px; background-color: #007BFF; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
+       Activate email
+    </a>
+    <br/>
+    <p style="color: #ff0000;"><b>Note:</b> This link is only valid for one hour.</p>
+    <p>Best regards,<br/>Keja Team</p>
+    </div>
+`;
+
+//email title
+const emailTitle = "Verify Keja Account"
     //send activation link
     verifyEmail({
         userEmail:Cap_email,
-        token:emailtoken
+        emailContent,
+        emailTitle
     })
 
     return response.status(200).json({
