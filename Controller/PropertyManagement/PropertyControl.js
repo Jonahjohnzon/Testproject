@@ -18,7 +18,7 @@ const createProperty = async(request, response) =>{
       property_type,
       acquisition_date,
       image,
-      amenties,
+      amenities,
       nearby_facilities
     })
 
