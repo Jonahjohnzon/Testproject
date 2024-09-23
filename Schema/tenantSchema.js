@@ -29,6 +29,9 @@ const Payment = Schema({
     }
 },{timestamps:true})
 
+const WaterMeter= Schema({
+
+},{timestamps:true})
 
 //Tenant Schema
 const Tenant = Schema({

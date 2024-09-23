@@ -160,7 +160,7 @@ const emailActivation = async(request, response)=>{
 
 const userData = async (request, response) =>{
 try{
-    const id = request.userId
+    const id = request.body.userId
 
     //get user details
     const data = await User.findOne({_id: id},{password:0})

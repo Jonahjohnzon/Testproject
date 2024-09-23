@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const adminRoute = require('../middleware/adminRoute')
 const verifyRole = require('../middleware/verifyRole')
 const tokenVerification = require("../middleware/tokenVerification")
 const {
@@ -9,7 +10,9 @@ const {
     userData 
 
 } = require('../Controller/AccountManagement/AccountController')
-
+const {
+    createProperty
+} = require('../Controller/PropertyManagement/PropertyControl')
 const {
     roleConfiguration
 } = require('../Controller/AccountManagement/AccountConfiguration')
@@ -23,5 +26,9 @@ router.get('/api/userdetails',tokenVerification, userData )
 
 //AccountConfiguration Routes
 router.put('/api/roleupdate',verifyRole, roleConfiguration)
+
+
+//PropertyController Routes
+router.post('/api/createProperty',adminRoute,createProperty)
 
 module.exports = router

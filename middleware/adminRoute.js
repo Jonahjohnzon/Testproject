@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 const {User} = require('../Schema/userSchema')
 
-const landlordRoute = async (request, response, next)=>{
+const adminRoute = async (request, response, next)=>{
 try{
     const token = request.headers["auth-token"]
 
@@ -17,11 +17,15 @@ try{
 
     //find user
     const getUser = await User.findOne({_id:id})
-
-    //check if role is landlord
-    if(getUser?.role == "landlord")
+    if(!getUser)
     {
-        request.userId = tokenobject.id
+        return response.status(403).json({result:false, message:  "User doesnt exist", redirect:true})
+    }
+    //check if role is landlord
+    if(getUser?.role == "admin")
+    {
+        console.log(tokenobject)
+        request.body.userId = tokenobject.id
         return next()
     }
 
@@ -41,4 +45,4 @@ catch(error)
     }
 }
 
-module.exports = landlordRoute;
+module.exports = adminRoute;

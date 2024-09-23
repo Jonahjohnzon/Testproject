@@ -17,11 +17,15 @@ try{
 
     //find user
     const getUser = await User.findOne({_id:id})
-
+    if(!getUser)
+        {
+            return response.status(403).json({result:false, message:  "User doesnt exist", redirect:true})
+        }
+        
     //check if role is tenant
     if(getUser?.role == "tenant")
     {
-        request.userId = tokenobject.id
+        request.body.userId = tokenobject.id
         return next()
     }
 

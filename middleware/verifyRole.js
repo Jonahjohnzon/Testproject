@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken')
-const {User} = require('../Schema/userSchema') 
 
 const  verifyRole = async (request, response, next)=>{
 try{
@@ -14,7 +13,7 @@ try{
     
     //verify token
     const tokenobject = jwt.verify(token, process.env.JWT)
-    request.userId = tokenobject.id
+    request.body.userId = tokenobject.id
     return next()
     }
 catch(error)

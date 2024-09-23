@@ -5,9 +5,7 @@ const {User} = require("../../Schema/userSchema")
 
 const roleConfiguration = async (request, response)=>{
 try{
-    const id = request.userId
-
-    const role = request.body.role
+    const {role, id} = request.body
     //get and update user
     const updateResult = await User.findOneAndUpdate({_id:id},{
         $set:{

@@ -6,7 +6,7 @@ const registrationSchema = yup.object().shape({
     name: yup.string().required('Username is required'),
     email: yup.string().email('Invalid email format').required('Email is required'),
     password: yup.string().required('Password is required'),
-    role:yup.string().oneOf(['tenant', 'landlord', 'manager'], 'Invalid role'),
+    role:yup.string().oneOf(['tenant', 'admin'], 'Invalid role'),
   })
 
 //login Validation

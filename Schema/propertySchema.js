@@ -39,7 +39,7 @@ const Maintenance = Schema({
     }
 },{timestamps:true})
 
-const Manager = Schema({
+const Admin = Schema({
     userId:{
          type: Schema.Types.ObjectId,
         ref: 'Users'
@@ -67,14 +67,11 @@ const Property = Schema({
     rentAmount:{
         type:Number
     },
-    manager:[Manager],
+    admin:[Admin],
     occupancyRate:{
         type:Number,
-        max: 100
-    },
-    landlord:{
-        type: Schema.Types.ObjectId,
-        ref: 'Users' 
+        max: 100,
+        default:0
     },
     tenants:[{
         type: Schema.Types.ObjectId,
@@ -85,7 +82,26 @@ const Property = Schema({
     units:[{type:String}],
     parking_space:{
         type:String
-    }
+    },
+    property_type:{
+        type:String,
+        enum:["apartment","house","commercial"]
+    },
+    acquisition_date:{
+        type:Date
+    },
+    description:{
+        type:String
+    },
+    image:{
+        type:String
+    },
+    amenities:[{
+        type:String
+    }],
+    nearby_facilities:[{
+        type:String
+    }]
 },{timestamps:true})
 
 module.exports.Property = model("Property", Property)

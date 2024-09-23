@@ -18,13 +18,16 @@ try{
    
     //find user
     const getUser = await User.findOne({_id:id})
-    console.log(getUser)
+    if(!getUser)
+        {
+            return response.status(403).json({result:false, message:  "User doesnt exist", redirect:true})
+        }
     if(getUser?.role == "none")
     {
         return response.status(403).json({result:false, message:  'Route not allowed', redirect:true})
     }
    
-    request.userId = tokenobject.id
+    request.body.userId = tokenobject.id
     return next()
     }
 catch(error)
