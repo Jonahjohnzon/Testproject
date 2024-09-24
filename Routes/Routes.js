@@ -11,8 +11,12 @@ const {
 
 } = require('../Controller/AccountManagement/AccountController')
 const {
-    createProperty
+    createProperty,
+    getProperty,
+    totalProperties
 } = require('../Controller/PropertyManagement/PropertyControl')
+
+const { Getmonthly} = require('../Controller/PropertyManagement/Getmonthly')
 const {
     roleConfiguration
 } = require('../Controller/AccountManagement/AccountConfiguration')
@@ -30,5 +34,8 @@ router.put('/api/roleupdate',verifyRole, roleConfiguration)
 
 //PropertyController Routes
 router.post('/api/createProperty',adminRoute,createProperty)
+router.get('/api/getProperty',adminRoute,getProperty)
+router.get('/api/getTotalProperty',adminRoute,totalProperties)
+router.get('/api/getmonthly',adminRoute,Getmonthly)
 
 module.exports = router

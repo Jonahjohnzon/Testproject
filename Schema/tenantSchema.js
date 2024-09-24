@@ -1,34 +1,5 @@
 const {Schema,model} =  require('mongoose')
 
-//Tenant Maintenance Request
-const Maintenance = Schema({
-    issue:{
-        type:String
-    },
-    title:{
-        type:String
-    },
-    status:{
-        type:String,
-        enum:["open, closed"]
-    }
-},{timestamps:true})
-
-//Tenant Payment Schema
-const Payment = Schema({
-    amount:{
-        type:Number
-    },
-    payment_method:{
-        type:String,
-        enum:["bank transfer", "credit card", "cash", "debit card"],
-        required:true
-    },
-    balance:{
-        type:Number
-    }
-},{timestamps:true})
-
 const WaterMeter= Schema({
 
 },{timestamps:true})
@@ -65,8 +36,11 @@ const Tenant = Schema({
     pets:{
         type:Boolean
     },
-    payment_history:[Payment],
-    maintenance_request:[Maintenance],
+    payment_history:[{type:Schema.Types.ObjectId,
+        ref:'Transaction'}],
+    maintenance_request:[{ 
+        type:Schema.Types.ObjectId,
+        ref:'Maintenance'}],
     lease_information:{
         start_date: {
             type: Date, // You can change this to another type if needed (e.g., String for custom formats)
@@ -87,6 +61,10 @@ const Tenant = Schema({
         type:String,
         enum:["pending","paid"],
         default:"pending"
+    },
+    admin:{
+        type:Schema.Types.ObjectId,
+        ref:'Users'
     }
 },{timestamps:true})
 

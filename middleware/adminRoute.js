@@ -24,7 +24,6 @@ try{
     //check if role is landlord
     if(getUser?.role == "admin")
     {
-        console.log(tokenobject)
         request.body.userId = tokenobject.id
         return next()
     }
