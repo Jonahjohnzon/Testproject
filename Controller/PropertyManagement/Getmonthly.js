@@ -7,11 +7,13 @@ const {Transaction} = require("../../Schema/transactionSchema")
 //Get monthly return
 const Getmonthly = async(request, response)=>{
     try{
-    const {userId,year} = request.body
+    const {userId} = request.body
+    const year = new Date().getFullYear(); // Gets the current year
+
 
 
     const result  = await Transaction.aggregate([
-        {$match:{admin:userId,type:rent,
+        {$match:{admin:userId,type:"rent",
         createdAt: {
           $gte: new Date(`${year}-01-01`),  // Start of the year
           $lte: new Date(`${year}-12-31`)   // End of the year
@@ -64,7 +66,7 @@ const Getmonthly = async(request, response)=>{
     });
 
 
-    response.status(200).json({monthlyTotals, monthlyAverageOccupancy});
+    response.status(200).json({rentalIncome:monthlyTotals, occupancyRates:monthlyAverageOccupancy});
     }
     catch(error)
     {

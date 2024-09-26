@@ -29,10 +29,6 @@ const Property = Schema({
         phone:{type:String}
     }
    ],
-    occupancy:{
-        type:Number,
-        default:0
-    },
     tenants:[{
         type: Schema.Types.ObjectId,
         ref: 'Tenant' 

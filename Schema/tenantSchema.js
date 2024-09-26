@@ -7,30 +7,21 @@ const WaterMeter= Schema({
 //Tenant Schema
 const Tenant = Schema({
 
-    tenant_id:{
+    tenantId:{
         type:Schema.Types.ObjectId,
         ref:'Users'
     },
-    contact:{
-        type:String
-    },
-    lease:{
-        type:String
-    },
-    rent:{
-        type:Number
-    },
-    payment_status:{
+    rentAmount:{
         type:Number
     },
     tenant_score:{
         type:Number
     },
-    property_id:{
+    propertyId:{
         type:Schema.Types.ObjectId,
         ref:'Property'
     },
-    occupants:{
+    numberOfOccupants:{
         type:Number
     },
     pets:{
@@ -42,16 +33,16 @@ const Tenant = Schema({
         type:Schema.Types.ObjectId,
         ref:'Maintenance'}],
     lease_information:{
-        start_date: {
+        leaseStartDate: {
             type: Date, // You can change this to another type if needed (e.g., String for custom formats)
             required: true // Assuming you want this field to be mandatory
           },
-          end_date: {
+          leaseEndDate: {
             type: Date,
             required: true // Optional, depending on your use case
           },
     },
-    security_deposit:{
+    securityDeposit:{
         type:Number
     },
     unit:{
@@ -59,7 +50,7 @@ const Tenant = Schema({
     },
     status:{
         type:String,
-        enum:["pending","paid"],
+        enum:["pending","paid","incomplete"],
         default:"pending"
     },
     admin:{
