@@ -10,20 +10,42 @@ const {
     userData 
 
 } = require('../Controller/AccountManagement/AccountController')
+
+
 const {
     createProperty,
     getProperty,
     totalProperties,
     getPropertyById,
-    getPropertyname
+    getPropertyname,
+    getMonthlyProperty,
+    getManagerProperty 
 } = require('../Controller/PropertyManagement/PropertyControl')
 
-const { Getmonthly} = require('../Controller/PropertyManagement/Getmonthly')
+
+const { 
+    Getmonthly
+} = require('../Controller/PropertyManagement/Getmonthly')
+
+
 const {
     roleConfiguration
 } = require('../Controller/AccountManagement/AccountConfiguration')
 
-const {createTenant} = require('../Controller/PropertyManagement/TenantController')
+const {
+    createTenant,
+    getOccupancyRate,
+    getTenents,
+    getTenantById
+} = require('../Controller/PropertyManagement/TenantController')
+
+const {
+    createLease
+} = require('../Controller/PropertyManagement/LeaseController')
+
+const {getTenantWaterMeter} = require('../Controller/PropertyManagement/WaterControl')
+
+const {getTenantInvoice,getRecipt} = require('../Controller/PropertyManagement/InvoiceControl')
 
 //AccountController Routes
 router.post('/api/signup', signUp)
@@ -42,8 +64,25 @@ router.get('/api/getTotalProperty',adminRoute,totalProperties)
 router.get('/api/getmonthly',adminRoute,Getmonthly)
 router.get('/api/getPropertyById',adminRoute, getPropertyById)
 router.get('/api/getPropertyname', adminRoute,getPropertyname)
+router.get('/api/getMonthlyProperty', adminRoute, getMonthlyProperty)
+router.get('/api/getManagerProperty', adminRoute,getManagerProperty )
 
 //TenantController Routes
 router.post('/api/createTenant',adminRoute,createTenant)
+router.get('/api/getOccupancyRate', adminRoute, getOccupancyRate)
+router.get('/api/getTenants',adminRoute,getTenents)
+router.get('/api/getTenantById', adminRoute, getTenantById)
+
+//LeaseController Routes
+router.post('/api/createLease', adminRoute, createLease)
+
+//WaterController Routes
+router.get('/api/getTenantWaterMeter',adminRoute, getTenantWaterMeter)
+
+//InvioceController
+router.get('/api/getTenantInvoice', adminRoute, getTenantInvoice)
+
+//ReceiptController
+router.get('/api/getRecipt', adminRoute, getRecipt)
 
 module.exports = router

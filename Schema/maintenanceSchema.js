@@ -9,12 +9,16 @@ const Maintenance = Schema({
     },
     status:{
         type:String,
-        enum:["pending", "progress","completed"]
+        enum:["Open", "inProgress","Completed"]
+    },
+    priority:{
+        type:String,
+        enum:["Low", "High","Medium"]
     }
     ,
-    tenant_id:{
+    user:{
         type:Schema.Types.ObjectId,
-        ref:'Tenant'
+        ref:'User'
     },
     property_id:{
          type:Schema.Types.ObjectId,

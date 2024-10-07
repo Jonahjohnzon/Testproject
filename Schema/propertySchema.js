@@ -1,6 +1,13 @@
 const {Schema,model} =  require('mongoose')
 
 
+// Tenant Subschema with timestamps
+const TenantSchema = new Schema({
+    tenant: { 
+        type: Schema.Types.ObjectId, 
+        ref: 'Tenant' 
+    }
+}, { timestamps: true });
 
 const Property = Schema({
     name:{
@@ -29,15 +36,12 @@ const Property = Schema({
         phone:{type:String}
     }
    ],
-    tenants:[{
-        type: Schema.Types.ObjectId,
-        ref: 'Tenant' 
-    }],
+   tenants: [TenantSchema],
     maintenanceRequest:[{  
         type:Schema.Types.ObjectId,
         ref:'Maintenance' }],
 
-    paymentHistory:[{ type:Schema.Types.ObjectId,
+    transactions:[{ type:Schema.Types.ObjectId,
         ref:'Transaction'}],
 
     unitIds:[{ type: Schema.Types.ObjectId,

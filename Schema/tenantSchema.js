@@ -32,21 +32,24 @@ const Tenant = Schema({
     maintenance_request:[{ 
         type:Schema.Types.ObjectId,
         ref:'Maintenance'}],
-    lease_information:{
-        leaseStartDate: {
+
+    leaseStartDate: {
             type: Date, // You can change this to another type if needed (e.g., String for custom formats)
             required: true // Assuming you want this field to be mandatory
           },
-          leaseEndDate: {
+    leaseEndDate: {
             type: Date,
             required: true // Optional, depending on your use case
           },
-    },
+  
     securityDeposit:{
         type:Number
     },
     unit:{
         type:String
+    },
+    parkingSpace:{
+        type:Number
     },
     status:{
         type:String,
@@ -56,7 +59,15 @@ const Tenant = Schema({
     admin:{
         type:Schema.Types.ObjectId,
         ref:'Users'
-    }
+    },
+    waterMeter:[{
+        type:Schema.Types.ObjectId,
+        ref:'WaterMeter'
+    }],
+    garbage:[{
+         type:Schema.Types.ObjectId,
+        ref:'Garbage'
+    }]
 },{timestamps:true})
 
 module.exports.Tenant = model('Tenant', Tenant)

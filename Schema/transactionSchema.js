@@ -10,12 +10,17 @@ const Transaction = Schema({
         enum:["bank transfer", "credit card", "cash", "debit card"],
         required:true
     },
+    tenant:{
+        type:Schema.Types.ObjectId,
+        ref:'Tenant'
+    }
+    ,
     balance:{
         type:Number
     },
-    tenant_id:{
+    user:{
         type:Schema.Types.ObjectId,
-        ref:'Tenant'
+        ref:'User'
     },
     type:{
         type:String,
@@ -32,7 +37,15 @@ const Transaction = Schema({
     admin:{
         type:Schema.Types.ObjectId,
         ref:'User'
-    }
+    },
+    StartDate: {
+        type: Date, // You can change this to another type if needed (e.g., String for custom formats)
+        required: true // Assuming you want this field to be mandatory
+      },
+    EndDate: {
+        type: Date,
+        required: true // Optional, depending on your use case
+      },
 },{timestamps:true})
 
 module.exports.Transaction = model("Transaction", Transaction)
